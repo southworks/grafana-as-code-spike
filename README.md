@@ -1,0 +1,1 @@
+Run in a VS Code terminal the command terraform init and next terraform apply -auto-approve, with this, grafana is going to take the terraform configuration of resources and show the new organization + folder and dashboard

@@ -21,13 +21,3 @@ resource "grafana_folder" "swks_test_folder" {
   provider = grafana
   title  = "Test Folder"
 }
-
-resource "grafana_dashboard" "swks_test_folder" {
-  org_id = grafana_organization.swks.org_id
-  folder = grafana_folder.swks_test_folder.id
-  overwrite = true
-  config_json = jsonencode({
-    "title" : "My Dashboard Title",
-    "uid" : "my-dashboard-uid"
-  })
-}

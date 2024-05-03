@@ -8,7 +8,7 @@ terraform {
 }
 
 provider "grafana" {
-  url  = "http://localhost:3000"
+  url  = "https://3094-2803-9800-9015-5500-29ad-6acf-b1d2-d0b2.ngrok-free.app/"
   auth = "admin:admin"
 }
 

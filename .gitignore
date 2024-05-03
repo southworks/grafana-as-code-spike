@@ -32,3 +32,8 @@ override.tf.json
 # Ignore CLI configuration files
 .terraformrc
 terraform.rc
+
+#Ignore jsonnet folders and files
+**/templates/vendor
+**/templates/jsonnetfile.json
+**/templates/jsonnetfile.lock.json

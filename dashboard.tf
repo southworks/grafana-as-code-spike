@@ -1,6 +1,5 @@
 resource "grafana_dashboard" "test" {
-  depends_on = [ grafana_cloud_stack_service_account_token.cloud_sa_token ]
-  provider = grafana.my_stack
+  provider = grafana
   folder = grafana_folder.swks_test_folder.id
   overwrite = true
   org_id = grafana_organization.swks.org_id

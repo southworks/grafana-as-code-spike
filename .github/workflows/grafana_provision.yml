@@ -35,8 +35,8 @@ jobs:
 
       # Post the preview (terraform plan) from the previous step as a GitHub pull request comment
       - name: Post Plan to GitHub PR
-        uses: mshick/add-pr-comment@v1
         if: github.ref != 'refs/heads/main'
+        uses: mshick/add-pr-comment@v1
         with:
           repo-token: ${{ secrets.GITHUB_TOKEN }}
           repo-token-user-login: 'github-actions[bot]'
@@ -47,10 +47,10 @@ jobs:
             ${{ steps.plan.outputs.stdout }}
             ```
             
+      #Apply the Terraform plan    
       - name: Apply Terraform
         if: github.ref == 'refs/heads/main'
         id: apply
-        continue-on-error: true
-        run: |
-          terraform apply -auto-approve
+        continue-on-error: false
+        run: terraform apply -auto-approve
       

@@ -14,10 +14,10 @@ jobs:
 
     steps:
       - name: Checkout
-      - uses: actions/checkout@v4
+        uses: actions/checkout@v4
         
       - name: HashiCorp - Setup Terraform
-      - uses: hashicorp/setup-terraform@v2.0.3
+        uses: hashicorp/setup-terraform@v2.0.3
 
       #Initialize terraform project
       - name: Terraform Init

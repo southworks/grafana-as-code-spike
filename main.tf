@@ -12,12 +12,12 @@ provider "grafana" {
   auth = "admin:admin"
 }
 
-resource "grafana_organization" "swks" {
-  name = "swks"
+resource "grafana_organization" "test" {
+  name = "test"
 }
 
-resource "grafana_folder" "swks_test_folder" {
+resource "grafana_folder" "test_folder" {
   provider = grafana
-  org_id = grafana_organization.swks.org_id
+  org_id = grafana_organization.test.org_id
   title  = "Test Folder"
 }

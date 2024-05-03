@@ -9,7 +9,7 @@ terraform {
 
 provider "grafana" {
   url  = "http://localhost:3000/"
-  auth = "glsa_6SPt27TdAHxRtdOu5DVNUuEdQA7aw8EQ_241e1796"
+  auth = "admin:admin"
 }
 
 resource "grafana_organization" "test" {

@@ -1,0 +1,52 @@
+name: CI
+
+on:
+  push:
+    branches: [ "main" ]
+  pull_request:
+    branches: [ "main" ]
+
+  workflow_dispatch:
+
+jobs:
+  provision:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+        
+      - name: HashiCorp - Setup Terraform
+        uses: hashicorp/setup-terraform@v3
+
+      #Initialize terraform project
+      - name: Terraform Init
+        run: terraform init
+
+      # Previews the changes that Terraform will make
+      - name: Plan Terraform
+        id: plan
+        continue-on-error: true
+        run: terraform plan -input=false -no-color
+
+      # Post the preview (terraform plan) from the previous step as a GitHub pull request comment
+      - name: Post Plan to GitHub PR
+        if: github.ref != 'refs/heads/main'
+        uses: mshick/add-pr-comment@v1
+        with:
+          repo-token: ${{ secrets.GITHUB_TOKEN }}
+          repo-token-user-login: 'github-actions[bot]'
+          message: |
+            Applying:
+
+            ```
+            ${{ steps.plan.outputs.stdout }}
+            ```
+            
+      #Apply the Terraform plan    
+      - name: Apply Terraform
+        if: github.ref == 'refs/heads/main'
+        id: apply
+        continue-on-error: false
+        run: terraform apply -auto-approve
+      

@@ -13,10 +13,8 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
+      - name: Checkout
       - uses: actions/checkout@v4
-
-      - name: Run a one-line script
-        run: echo working!
         
       - name: HashiCorp - Setup Terraform
       - uses: hashicorp/setup-terraform@v2.0.3
@@ -37,8 +35,8 @@ jobs:
 
       # Post the preview (terraform plan) from the previous step as a GitHub pull request comment
       - name: Post Plan to GitHub PR
-        if: github.ref != 'refs/heads/main'
         uses: mshick/add-pr-comment@v1
+        if: github.ref != 'refs/heads/main'
         with:
           repo-token: ${{ secrets.GITHUB_TOKEN }}
           repo-token-user-login: 'github-actions[bot]'
